@@ -1,15 +1,18 @@
 FROM node:14-alpine3.11
+ARG SERVER_PORT
+ENV PORT=$SERVER_PORT
 
 WORKDIR /home/node/app
 
+COPY . .
 RUN apk add --no-cache bash
 
-RUN npm i -g @nestjs/cli
+RUN yarn
 
-USER node
+RUN yarn build
 
-COPY . .
+ENTRYPOINT ["bash", "./.docker/entrypoint.sh"]
 
 EXPOSE $PORT
 
-ENTRYPOINT ["bash", "./.docker/entrypoint.sh"]
+CMD yarn start:prod
