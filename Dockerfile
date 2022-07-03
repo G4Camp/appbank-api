@@ -2,7 +2,7 @@ FROM node:14-alpine3.11
 ARG SERVER_PORT
 ENV PORT=$SERVER_PORT
 
-WORKDIR "/app"
+WORKDIR /home/node/app
 
 COPY . .
 RUN apk add --no-cache bash
@@ -13,6 +13,6 @@ RUN npm run build
 
 # RUN npm run typeorm migration:run
 
-EXPOSE $PORT
+EXPOSE 8081
 
 CMD npm run start:prod
