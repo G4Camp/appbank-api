@@ -1,16 +1,18 @@
-FROM node:14-alpine AS builder
+FROM node:14-alpine3.11
+ARG SERVER_PORT
+ENV PORT=$SERVER_PORT
+
 WORKDIR "/app"
+
 COPY . .
-RUN npm ci
+RUN apk add --no-cache bash
+
+RUN npm i
+
 RUN npm run build
-RUN npm prune --production
-FROM node:14-alpine AS production
-WORKDIR "/app"
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/package-lock.json ./package-lock.json
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
 
-EXPOSE $SERVER_PORT
+# RUN npm run typeorm migration:run
 
-CMD [ "sh", "-c", "npm run start:prod"]
+EXPOSE $PORT
+
+CMD npm run start:prod
