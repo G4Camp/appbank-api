@@ -1,4 +1,4 @@
-FROM node:14-alpine3.11
+FROM node:16-alpine3.15
 ARG SERVER_PORT
 ENV PORT=$SERVER_PORT
 
