@@ -3,7 +3,7 @@ node('master') {
         checkout scm
     }
     stage ('Build') {
-        sh "docker build --build-arg SERVER_PORT=${SERVER_PORT} -m 3g -t appbank_api:B${BUILD_NUMBER} -f Dockerfile ."
+        sh "docker build --build-arg SERVER_PORT=${SERVER_PORT} -t appbank/auth:B${BUILD_NUMBER} -f Dockerfile ."
     }
     stage ('Deployment') {
         try {
