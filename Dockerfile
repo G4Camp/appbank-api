@@ -7,12 +7,12 @@ WORKDIR /home/node/app
 COPY . .
 RUN apk add --no-cache bash
 
-RUN npm i
+RUN yarn
 
-RUN npm run build
+RUN yarn build
 
-# RUN npm run typeorm migration:run
+ENTRYPOINT ["bash", "./.docker/entrypoint.sh"]
 
-EXPOSE 8081
+EXPOSE $PORT
 
-CMD npm run start:prod
+CMD yarn start:prod
