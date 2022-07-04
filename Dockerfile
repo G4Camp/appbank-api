@@ -7,12 +7,12 @@ WORKDIR /home/node/app
 COPY . .
 RUN apk add --no-cache bash
 
-RUN yarn
+RUN npm i
 
-RUN yarn build
+RUN npm run build
 
 ENTRYPOINT ["bash", "./.docker/entrypoint.sh"]
 
 EXPOSE $PORT
 
-CMD yarn start:prod
+CMD ["-b", "0.0.0.0"]
