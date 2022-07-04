@@ -12,7 +12,7 @@ node('master') {
         } catch (Exception e) {
             sh "echo 'container not running'"
         }
-        sh "docker run -d -e PORT=${SERVER_PORT} -p ${SERVER_PORT}:${SERVER_PORT} --name appbank_api appbank/api:B${BUILD_NUMBER}"
+        sh "docker run -d -e SERVER_PORT=${SERVER_PORT} -e PORT=${SERVER_PORT} -p ${SERVER_PORT}:${SERVER_PORT} --name appbank_api appbank/api:B${BUILD_NUMBER}"
         
     }
 }
