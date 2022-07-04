@@ -11,8 +11,8 @@ RUN npm i
 
 RUN npm run build
 
-ENTRYPOINT ["bash", "./.docker/entrypoint.sh"]
+# RUN npm run typeorm migration:run
 
 EXPOSE $PORT
 
-CMD ["-b", "0.0.0.0"]
+CMD npm run start:prod
